@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <!-- Primary Meta Tags -->
+  <meta name="title" content="ChatEarthBench: Benchmarking Multimodal Large Language Models for Earth Observation">
+  <meta name="description" content="ChatEarthBench is a comprehensive benchmark dataset specifically designed for zero-shot evaluation of Multimodal Large Language Models (MLLMs) in Earth Observation.">
+  <meta name="keywords" content="Earth Observation, Multimodal Large Language Models, Benchmark, Remote Sensing, AI">
+  <meta name="author" content="Zhenghang Yuan, Zhitong Xiong, Thomas Dujardin, Xiang Li, Lichao Mou, Xiao Xiang Zhu">
+  <meta name="robots" content="index, follow">
+  <meta name="language" content="English">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="ChatEarthBench">
+  <meta property="og:title" content="ChatEarthBench: Benchmarking Multimodal Large Language Models for Earth Observation">
+  <meta property="og:description" content="ChatEarthBench is a comprehensive benchmark dataset specifically designed for zero-shot evaluation of Multimodal Large Language Models (MLLMs) in Earth Observation.">
+  <meta property="og:url" content="https://github.com/git_terra/chatearthbench_project">
+  <meta property="og:image" content="static/images/Figure1.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="ChatEarthBench">
+  <meta property="article:published_time" content="2024-01-01T00:00:00.000Z">
+  <meta property="article:author" content="Zhenghang Yuan">
+  <meta property="article:section" content="Research">
+  <meta property="article:tag" content="Earth Observation">
+  <meta property="article:tag" content="MLLM">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@ChatEarthBench">
+  <meta name="twitter:creator" content="@ZhenghangYuan">
+  <meta name="twitter:title" content="ChatEarthBench: Benchmarking Multimodal Large Language Models for Earth Observation">
+  <meta name="twitter:description" content="ChatEarthBench is a comprehensive benchmark dataset specifically designed for zero-shot evaluation of Multimodal Large Language Models (MLLMs) in Earth Observation.">
+  <meta name="twitter:image" content="static/images/Figure1.png">
+  <meta name="twitter:image:alt" content="ChatEarthBench">
+
+  <!-- Academic/Research Specific -->
+  <meta name="citation_title" content="ChatEarthBench: Benchmarking Multimodal Large Language Models for Earth Observation">
+  <meta name="citation_author" content="Yuan, Zhenghang">
+  <meta name="citation_author" content="Xiong, Zhitong">
+  <meta name="citation_publication_date" content="2024">
+  <meta name="citation_conference_title" content="IEEE GRSM">
+  <meta name="citation_pdf_url" content="">
+  
+  <!-- Additional SEO -->
+  <meta name="theme-color" content="#2563eb">
+  <meta name="msapplication-TileColor" content="#2563eb">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  
+  <!-- Preconnect for performance -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://ajax.googleapis.com">
+  <link rel="preconnect" href="https://documentcloud.adobe.com">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+
+
+  <title>ChatEarthBench: Benchmarking Multimodal Large Language Models for Earth Observation</title>
+  
+  <!-- Favicon and App Icons -->
+  <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
+  <link rel="apple-touch-icon" href="static/images/favicon.ico">
+  
+  <!-- Critical CSS - Load synchronously -->
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+  
+  <!-- Non-critical CSS - Load asynchronously -->
+  <link rel="preload" href="static/css/bulma-carousel.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="static/css/bulma-slider.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="static/css/fontawesome.all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preload" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  
+  <!-- Fallback for browsers that don't support preload -->
+  <noscript>
+    <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+    <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+    <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  </noscript>
+  
+  <!-- Fonts - Optimized loading -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Defer non-critical JavaScript -->
+  <script defer src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script defer src="static/js/bulma-carousel.min.js"></script>
+  <script defer src="static/js/bulma-slider.min.js"></script>
+  <script defer src="static/js/index.js"></script>
+  
+  <!-- Structured Data for Academic Papers -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ScholarlyArticle",
+    "headline": "ChatEarthBench: Benchmarking Multimodal Large Language Models for Earth Observation",
+    "description": "ChatEarthBench is a comprehensive benchmark dataset specifically designed for zero-shot evaluation of Multimodal Large Language Models (MLLMs) in Earth Observation.",
+    "author": [
+      {
+        "@type": "Person",
+        "name": "Zhenghang Yuan"
+      },
+      {
+        "@type": "Person",
+        "name": "Zhitong Xiong"
+      }
+    ],
+    "datePublished": "2026-01-01",
+    "publisher": {
+      "@type": "Organization",
+      "name": "IEEE GRSM"
+    },
+    "url": "https://github.com/git_terra/chatearthbench_project",
+    "image": "static/images/Figure1.png",
+    "keywords": ["Earth Observation", "MLLM", "Benchmark"],
+    "abstract": "The recent advancements in multimodal large language models (MLLMs) offer new opportunities for Earth observation (EO) tasks by enhancing reasoning and analysis capabilities. However, fair and systematic evaluation of these models remains challenging. Existing assessments often suffer from dataset biases, which can lead to an overestimation of model performance and inconsistent comparisons across MLLMs. To address this issue, we introduce ChatEarthBench, a comprehensive benchmark dataset specifically designed for zero-shot evaluation of MLLMs in EO.",
+    "citation": "",
+    "isAccessibleForFree": true,
+    "license": "https://creativecommons.org/licenses/by/4.0/",
+    "mainEntity": {
+      "@type": "WebPage",
+      "@id": "https://github.com/git_terra/chatearthbench_project"
+    },
+    "about": [
+      {
+        "@type": "Thing",
+        "name": "Earth Observation"
+      },
+      {
+        "@type": "Thing", 
+        "name": "Multimodal Large Language Models"
+      }
+    ]
+  }
+  </script>
+  
+  <!-- Website/Organization Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "ChatEarthBench",
+    "url": "https://github.com/git_terra/chatearthbench_project",
+    "logo": "static/images/favicon.ico",
+    "sameAs": [
+    ]
+  }
+  </script>
+</head>
+<body>
+
+
+  <!-- Scroll to Top Button -->
+  <button class="scroll-to-top" onclick="scrollToTop()" title="Scroll to top" aria-label="Scroll to top">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <!-- More Works Dropdown -->
+  <!--
+  <div class="more-works-container">
+    <button class="more-works-btn" onclick="toggleMoreWorks()" title="View More Works from Our Lab">
+      <i class="fas fa-flask"></i>
+      More Works
+      <i class="fas fa-chevron-down dropdown-arrow"></i>
+    </button>
+    <div class="more-works-dropdown" id="moreWorksDropdown">
+      <div class="dropdown-header">
+        <h4>More Works from Our Lab</h4>
+        <button class="close-btn" onclick="toggleMoreWorks()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="works-list">
+        <a href="https://arxiv.org/abs/PAPER_ID_1" class="work-item" target="_blank">
+          <div class="work-info">
+            <h5>Paper Title 1</h5>
+            <p>Brief description of the work and its main contribution.</p>
+            <span class="work-venue">Conference/Journal 2024</span>
+          </div>
+          <i class="fas fa-external-link-alt"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+  -->
+
+  <main id="main-content">
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">ChatEarthBench: Benchmarking Multimodal Large Language Models for Earth Observation</h1>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">
+                <a href="https://scholar.google.com/citations?user=W5Y1XhIAAAAJ&hl=en" target="_blank">Zhenghang Yuan</a>,</span>
+                <span class="author-block">
+                  <a href="https://scholar.google.com/citations?user=zKUfuxoAAAAJ&hl=en" target="_blank">Zhitong Xiong</a>,</span>
+                  <span class="author-block">
+                    <a href="#" target="_blank">Thomas Dujardin</a>,</span>
+                  <span class="author-block">
+                    <a href="https://scholar.google.com/citations?user=4Apl5FgAAAAJ&hl=en" target="_blank">Xiang Li</a>,</span>
+                  <span class="author-block">
+                    <a href="https://scholar.google.com/citations?user=7k8GAaEAAAAJ&hl=en" target="_blank">Lichao Mou</a>,</span>
+                  <span class="author-block">
+                    <a href="https://scholar.google.com/citations?user=CNakdIgAAAAJ&hl=en" target="_blank">Xiao Xiang Zhu</a>
+                  </span>
+                  </div>
+
+                  <div class="is-size-5 publication-authors">
+                    <span class="author-block">IEEE GRSM</span>
+                  </div>
+
+                  <div class="column has-text-centered">
+                    <div class="publication-links">
+                      <span class="link-block">
+                        <a href="#" target="_blank"
+                        class="external-link button is-normal is-rounded is-dark">
+                        <span class="icon">
+                          <i class="fas fa-file-pdf"></i>
+                        </span>
+                        <span>Paper</span>
+                      </a>
+                    </span>
+
+                  <span class="link-block">
+                    <a href="#" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code</span>
+                  </a>
+                </span>
+
+                <span class="link-block">
+                    <a href="#" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fas fa-server"></i>
+                    </span>
+                    <span>Evaluation Server</span>
+                  </a>
+                </span>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="columns is-centered has-text-centered" style="margin-top: -2rem; margin-bottom: 2rem;">
+  <div class="column is-four-fifths">
+    <p class="is-size-6 has-text-grey">
+      <i>* The evaluation server will be publicly released upon the paper's publication.</i>
+    </p>
+  </div>
+</div>
+
+
+<!-- Teaser -->
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <img src="static/images/Figure2.png" alt="ChatEarthBench Teaser" style="width: 100%;">
+      <h2 class="subtitle has-text-centered">
+        Figure 2: Illustration of the data samples in ChatEarthBench. There are 10 sub-datasets spanning three data modalities and four different tasks. Note that this figure is a schematic representation and does not correspond to the real geographical locations.
+      </h2>
+    </div>
+  </div>
+</section>
+<!-- End teaser -->
+
+<!-- Paper abstract -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            The recent advancements in multimodal large language models (MLLMs) offer new opportunities for Earth observation (EO) tasks by enhancing reasoning and analysis capabilities. However, fair and systematic evaluation of these models remains challenging. Existing assessments often suffer from dataset biases, which can lead to an overestimation of model performance and inconsistent comparisons across MLLMs. To address this issue, we introduce ChatEarthBench, a comprehensive benchmark dataset specifically designed for zero-shot evaluation of MLLMs in EO. ChatEarthBench comprises 10 image-text datasets spanning three data modalities. Importantly, these datasets are unseen by the evaluated MLLMs in our work to enable rigorous and fair zero-shot evaluation across diverse real-world EO tasks. By systematically analyzing MLLM performance across various EO tasks, we provide critical insights into their capabilities and limitations. Our findings offer essential guidance for the development of more robust and generalizable MLLMs for EO applications.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End paper abstract -->
+
+<!-- Motivation -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Motivation</h2>
+        <div class="content has-text-justified">
+          <p>
+            Current evaluations of Earth Observation (EO) MLLMs face a critical challenge: the substantial overlap between training and evaluation data. Existing benchmarks often incorporate samples that models have already seen during training, making it difficult to distinguish true generalization from memorization. Furthermore, variations in training protocols and optimization strategies across studies complicate fair comparisons. The following figure visualizes this data entanglement in representative EO MLLMs. To address these issues, we propose a more rigorous evaluation framework with independent test sets, ensuring unbiased and reliable assessment of model capabilities.
+          </p>
+          <img src="static/images/Figure1.png" alt="Motivation Figure" style="width: 100%;">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End Motivation -->
+
+<!-- Contributions -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Contributions</h2>
+        <div class="content has-text-justified">
+          <p>
+            We comprehensively analyze datasets across EO MLLMs, revealing critical gaps in current evaluation practices and the challenges posed by dataset overlap between training and testing. Our work shifts focus from architectural innovations to the fundamental issue of fair model assessment.
+          </p>
+          <ul>
+            <li>We introduce ChatEarthBench, a benchmark suite containing 112K image-text pairs from previously unused data sources, enabling real zero-shot evaluation of EO MLLMs. The benchmark spans diverse tasks, including concise/detailed image captioning, VQA, and multilabel classification across different spatial resolutions.</li>
+            <li>We conduct a systematic comparative evaluation of 11 MLLMs (both general and EO-specific MLLMs) using ChatEarthBench, providing insights into their relative capabilities and limitations in EO tasks.</li>
+            <li>Based on our benchmark results, we identify key directions for advancing EO MLLMs, including expanding EO data modalities, improving model scalability and generalizability, exploring multimodal reasoning, and enhancing reliability and robustness.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End Contributions -->
+
+
+<!-- Image carousel -->
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title is-3">Visualization Results</h2>
+      <div id="results-carousel" class="carousel results-carousel">
+       <div class="item">
+        <img src="static/images/visualization_result1.png" alt="Visualization Result 1" loading="lazy"/>
+        <h2 class="subtitle has-text-centered">
+          Visualization Result 1
+        </h2>
+      </div>
+      <div class="item">
+        <img src="static/images/visualization_result2.png" alt="Visualization Result 2" loading="lazy"/>
+        <h2 class="subtitle has-text-centered">
+          Visualization Result 2
+        </h2>
+      </div>
+      <div class="item">
+        <img src="static/images/visualization_result3.png" alt="Visualization Result 3" loading="lazy"/>
+        <h2 class="subtitle has-text-centered">
+         Visualization Result 3
+       </h2>
+     </div>
+  </div>
+</div>
+</div>
+</section>
+<!-- End image carousel -->
+
+
+
+
+<!-- Datasets Statistics -->
+<section class="hero is-small is-light">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title is-3">Datasets Statistics</h2>
+      
+      <h3 class="title is-4">Word Clouds</h3>
+      <div class="columns is-multiline">
+        <div class="column is-4">
+          <figure class="image">
+            <img src="static/images/wordcloud_short_chatearthnet.png" alt="Word cloud for concise captions in ChatEarthNet-CIC">
+            <figcaption class="has-text-centered">Concise captions in ChatEarthNet-CIC</figcaption>
+          </figure>
+        </div>
+        <div class="column is-4">
+          <figure class="image">
+            <img src="static/images/wordcloud_detailed_chatearthnet.png" alt="Word cloud for detailed captions in ChatEarthNet-DIC">
+            <figcaption class="has-text-centered">Detailed captions in ChatEarthNet-DIC</figcaption>
+          </figure>
+        </div>
+        <div class="column is-4">
+          <figure class="image">
+            <img src="static/images/wordcloud_vqa_chatearthnet.png" alt="Word cloud for VQA questions in ChatEarthNet-VQA">
+            <figcaption class="has-text-centered">VQA questions in ChatEarthNet-VQA</figcaption>
+          </figure>
+        </div>
+        <div class="column is-4">
+          <figure class="image">
+            <img src="static/images/wordcloud_vqa_flair2.png" alt="Word cloud for questions in ChatFLAIR#2-VQA">
+            <figcaption class="has-text-centered">Questions in ChatFLAIR#2-VQA</figcaption>
+          </figure>
+        </div>
+        <div class="column is-4">
+          <figure class="image">
+            <img src="static/images/wordcloud_detailed_flair2.png" alt="Word cloud for detailed captions in ChatFLAIR#2-DIC">
+            <figcaption class="has-text-centered">Detailed captions in ChatFLAIR#2-DIC</figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <h3 class="title is-4">Word Frequency Distributions</h3>
+      <div class="columns is-multiline">
+        <div class="column is-6">
+          <figure class="image">
+            <img src="static/images/word_freq_detailed_chatearthnet.png" alt="Word frequency detailed ChatEarthNet">
+            <figcaption class="has-text-centered">Detailed captions in ChatEarthNet-DIC</figcaption>
+          </figure>
+        </div>
+        <div class="column is-6">
+          <figure class="image">
+            <img src="static/images/word_freq_detailed_flair2.png" alt="Word frequency detailed Flair2">
+            <figcaption class="has-text-centered">Detailed captions in ChatFLAIR#2-DIC</figcaption>
+          </figure>
+        </div>
+        <div class="column is-6">
+          <figure class="image">
+            <img src="static/images/word_freq_multilabel_chatearthnet.png" alt="Word frequency multilabel ChatEarthNet">
+            <figcaption class="has-text-centered">Multilabel classification in ChatEarthNet-MLC</figcaption>
+          </figure>
+        </div>
+        <div class="column is-6">
+          <figure class="image">
+            <img src="static/images/word_freq_short_chatearthnet.png" alt="Word frequency short ChatEarthNet">
+            <figcaption class="has-text-centered">Concise captions in ChatEarthNet-CIC</figcaption>
+          </figure>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<!-- End Datasets Statistics -->
+
+
+<!-- Perspectives -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Perspectives on the Future MLLMs for EO</h2>
+        <div class="content has-text-justified">
+          <p>
+            Based on our evaluation results, we anticipate several critical aspects that will drive the next generation of MLLMs for EO:
+          </p>
+          <p>
+            <strong>Supported Data Modalities in Earth Observation:</strong> Future MLLMs should expand their ability to handle a wider range of EO data modalities. While current models can process optical imagery, next-generation models need to seamlessly integrate additional modalities such as multi-spectral and hyperspectral data. Incorporating these diverse inputs will allow for a more comprehensive understanding of Earth systems and improve performance on complex, multimodal tasks.
+          </p>
+          <p>
+            <strong>Model Scalability and Generalizability:</strong> The architectural design of future LLMs should emphasize scalability, allowing for the easy adaptation of models to new EO tasks or datasets. This includes the use of specialized domains of data that can focus on broader aspects of EO data. Researchers should also consider enhancing the in-context learning ability of the MLLMs for deploying these systems in real-world applications.
+          </p>
+          <p>
+            <strong>Multimodal Reasoning:</strong> One of the primary challenges in leveraging MLLMs for EO tasks lies in their ability to effectively understand and fuse multimodal data. For instance, enhancing existing MLLMs to integrate both Sentinel-1 and Sentinel-2 data and determining the optimal fusion strategy is critical for improving performance in complex and high-stakes scenarios, such as disaster response.
+          </p>
+          <p>
+            <strong>Reliability and Robustness:</strong> Reliability remains a significant challenge for MLLMs in the EO domain. Models should become more robust, particularly in handling noisy or incomplete data, which is common in real-world remote sensing scenarios. Additionally, ensuring that models generalize well across diverse geographic regions and environmental conditions will be key to their practical deployment.
+          </p>
+          <p>
+            By addressing these aspects and incorporating robust evaluation techniques, the next generation of MLLMs can be better equipped to meet the complex and growing demands of Earth monitoring and analysis.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End Perspectives -->
+
+<!--BibTex citation -->
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <div class="bibtex-header">
+        <h2 class="title">BibTeX</h2>
+        <button class="copy-bibtex-btn" onclick="copyBibTeX()" title="Copy BibTeX to clipboard">
+          <i class="fas fa-copy"></i>
+          <span class="copy-text">Copy</span>
+        </button>
+      </div>
+      <pre id="bibtex-code"><code>@article{Yuan2026ChatEarthBench,
+  title={ChatEarthBench: Benchmarking Multimodal Large Language Models for Earth Observation},
+  author={Zhenghang Yuan, Zhitong Xiong, Thomas Dujardin, Xiang Li, Lichao Mou, and Xiao Xiang Zhu},
+  journal={IEEE Geoscience and Remote Sensing Magazine},
+  year={2026}
+}</code></pre>
+    </div>
+</section>
+<!--End BibTex citation -->
+
+
+  <footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+
+          <p>
+            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+            You are free to borrow the source code of this website, we just ask that you link back to this page in the footer. <br> This website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Statcounter tracking code -->
+  
+<!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
+
+    <!-- End of Statcounter Code -->
+
+  </body>
+  </html>
